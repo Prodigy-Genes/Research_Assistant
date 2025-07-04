@@ -1,0 +1,319 @@
+/* TypingIndicator.css */
+
+.typing-indicator-container {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.typing-indicator-avatar {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--light-gray);
+  transition: all 0.3s ease;
+}
+
+.typing-indicator-avatar:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-hover);
+}
+
+.typing-indicator-avatar-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--gray);
+  transition: color 0.3s ease;
+}
+
+.typing-indicator-avatar:hover .typing-indicator-avatar-icon {
+  color: var(--primary);
+}
+
+.typing-indicator-content {
+  flex: 1;
+}
+
+.typing-indicator-bubble {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.95);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 1.5rem;
+  border-bottom-left-radius: 0.375rem;
+  padding: 1rem 1.25rem;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.typing-indicator-bubble::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), transparent);
+  pointer-events: none;
+}
+
+.typing-indicator-bubble:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-1px);
+}
+
+.typing-indicator-content-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.typing-indicator-dots {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.typing-indicator-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--gray);
+  border-radius: 50%;
+  animation: typingBounce 1.2s ease-in-out infinite;
+}
+
+.typing-indicator-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.typing-indicator-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.typing-indicator-text {
+  font-size: 0.875rem;
+  color: var(--gray);
+  margin-left: 0.5rem;
+  opacity: 0.8;
+  font-weight: 500;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Keyframe animations */
+@keyframes typingBounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: translateY(-8px);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+/* Alternative dot animation for more dynamic effect */
+.typing-indicator-dot.enhanced {
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  animation: enhancedBounce 1.5s ease-in-out infinite;
+  box-shadow: 0 2px 4px rgba(67, 97, 238, 0.3);
+}
+
+@keyframes enhancedBounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.6;
+  }
+  40% {
+    transform: translateY(-10px) scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* Breathing effect for the entire bubble */
+.typing-indicator-bubble {
+  animation: breathe 3s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .typing-indicator-container {
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+  
+  .typing-indicator-avatar {
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  .typing-indicator-avatar-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+  
+  .typing-indicator-bubble {
+    padding: 0.875rem 1rem;
+  }
+  
+  .typing-indicator-text {
+    font-size: 0.8rem;
+  }
+  
+  .typing-indicator-dot {
+    width: 0.375rem;
+    height: 0.375rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .typing-indicator-container {
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+  
+  .typing-indicator-avatar {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+  
+  .typing-indicator-avatar-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+  
+  .typing-indicator-bubble {
+    padding: 0.75rem 0.875rem;
+    border-radius: 1.25rem;
+  }
+  
+  .typing-indicator-text {
+    font-size: 0.75rem;
+    margin-left: 0.375rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .typing-indicator-bubble {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .typing-indicator-avatar {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .typing-indicator-avatar-icon {
+    color: var(--light);
+  }
+  
+  .typing-indicator-text {
+    color: var(--light);
+  }
+  
+  .typing-indicator-dot {
+    background: var(--light);
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .typing-indicator-dot {
+    animation: none;
+  }
+  
+  .typing-indicator-text {
+    animation: none;
+  }
+  
+  .typing-indicator-bubble {
+    animation: none;
+  }
+  
+  .typing-indicator-avatar {
+    transition: none;
+  }
+}
+
+/* Focus states for accessibility */
+.typing-indicator-container:focus-within {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: var(--border-radius);
+}
+
+/* Loading state enhancement */
+.typing-indicator-bubble::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+/* Staggered entrance animation */
+.typing-indicator-container {
+  animation: slideInFromLeft 0.5s ease-out;
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
