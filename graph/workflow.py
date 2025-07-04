@@ -1,4 +1,4 @@
-from langgraph.graph import StateGraph
+from langgraph.graph import StateGraph, END
 from .nodes import *
 from state import ResearchState
 

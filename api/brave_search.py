@@ -1,5 +1,6 @@
 import requests
 import logging
+from typing import List, Dict, Any
 from config import Config
 
 logger = logging.getLogger(__name__)
@@ -10,7 +11,7 @@ class BraveSearchAPI:
     BASE_URL = "https://api.search.brave.com/res/v1/web/search"
     
     @staticmethod
-    def search(query: str, count: int = 5) -> List[Dict[str, Any]]: # type: ignore
+    def search(query: str, count: int = 5) -> List[Dict[str, Any]]:
         """Perform web search using Brave Search API"""
         if not Config.BRAVE_API_KEY:
             logger.error("Brave API key not configured")

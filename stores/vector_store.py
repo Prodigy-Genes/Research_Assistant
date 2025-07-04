@@ -2,8 +2,9 @@ import chromadb
 from sentence_transformers import SentenceTransformer
 from datetime import datetime
 import logging
-from typing import List, Dict, Any
 from config import Config
+import chromadb.errors  # Import ChromaDB specific errors
+from typing import List, Dict, Any
 
 logger = logging.getLogger(__name__)
 
@@ -18,12 +19,16 @@ class VectorStore:
         try:
             self.collection = self.chroma_client.get_collection(collection_name)
             logger.info(f"Loaded existing collection: {collection_name}")
-        except ValueError:
+        except chromadb.errors.NotFoundError:
+            # Collection doesn't exist, create it
             self.collection = self.chroma_client.create_collection(
                 name=collection_name,
                 metadata={"description": "Research documents collection"}
             )
             logger.info(f"Created new collection: {collection_name}")
+        except Exception as e:
+            logger.error(f"Error initializing vector store: {e}")
+            raise
     
     def add_documents(self, documents: List[Dict[str, Any]]) -> None:
         """Add documents to the vector store"""

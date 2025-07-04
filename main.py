@@ -37,7 +37,7 @@ if __name__ == "__main__":
             question = input("\n❓ Your question: ").strip()
             
             if question.lower() in ['quit', 'exit', 'q']:
-                print("👋 Goodbye!")
+                print("👋 Later!")
                 break
             
             if not question:
